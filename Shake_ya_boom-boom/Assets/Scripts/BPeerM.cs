@@ -6,9 +6,9 @@ public class BPeerM : MonoBehaviour
 {
     private static BPeerM _BPeerMInstatce;
     public float _bpm;
-    private float _beatInterval, _beatTimer, _beatIntervalD8, _beatTimerD8, _beatIntervalD16, _beatTimerD16;
-    public static bool _beatFull, _beatD8, _beatD16;
-    public static int _beatCountFull, _beatCountD8, _beatCountD16;
+    private float _beatInterval, _beatTimer, _beatIntervalD8, _beatTimerD8;
+    public static bool _beatFull, _beatD8;
+    public static int _beatCountFull, _beatCountD8;
 
     private void Awake()
     {
@@ -38,7 +38,7 @@ public class BPeerM : MonoBehaviour
 
     void BeatDetection()
     {
-        //full beat count - рассчет бита на 4/4, 8/4, 16/4, 32/4
+        //full beat count 
 
         _beatFull = false;
         _beatInterval = 60 / _bpm;
@@ -51,7 +51,7 @@ public class BPeerM : MonoBehaviour
             Debug.Log("Beat_Full");
         }
 
-        //divided beat count - рассчет бита на 8/4, 16/4, 32/4
+        //divided beat count - рассчет бита на 8/4
         _beatD8 = false;
         _beatIntervalD8 = _beatInterval / 8;
         _beatTimerD8 += Time.deltaTime;
@@ -62,18 +62,6 @@ public class BPeerM : MonoBehaviour
             _beatCountD8++;
             Debug.Log("Beat_8");
         }
-
-        _beatD16 = false;
-        _beatIntervalD16 = _beatInterval / 16;
-        _beatTimerD16 += Time.deltaTime;
-        if (_beatTimerD16 >= _beatIntervalD16)
-        {
-            _beatTimerD16 -= _beatIntervalD16;
-            _beatD16 = true;
-            _beatCountD16++;
-            Debug.Log("Beat_16");
-        }
-
     }
 
 }
